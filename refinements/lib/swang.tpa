@@ -14,11 +14,11 @@ COPY ~refinements/Hlab/_anim/SSSWARR.bam~       ~override~
 COPY_EXISTING     ~KIT.IDS~                  ~override/KIT.IDS~
 REPLACE_TEXTUALLY ~0x00000004~         ~0x4003~
 REPLACE_TEXTUALLY ~0x40030000~ 	       ~0x4003~
-COPY ~refinements/Hlab/_shared/copy/STATES2.BAM~     ~override~
-COPY ~refinements/Hlab/_shared/copy/STATES.BAM~      ~override~
+// COPY ~refinements/Hlab/_shared/copy/STATES2.BAM~     ~override~
+// COPY ~refinements/Hlab/_shared/copy/STATES.BAM~      ~override~
   //fixes for Spell Shield:
-COPY ~refinements/Hlab/_shared/copy/SPWI519.SPL~      ~override~
-COPY ~refinements/Hlab/_shared/copy/SPWI606.SPL~      ~override~
+// COPY ~refinements/Hlab/_shared/copy/SPWI519.SPL~      ~override~
+// COPY ~refinements/Hlab/_shared/copy/SPWI606.SPL~      ~override~
 // COPY ~refinements/Hlab/_shared/STATDESC.2DA~     ~override/STATDESC.2DA~
 
 ACTION_IF GAME_IS ~tob bgt~ BEGIN
