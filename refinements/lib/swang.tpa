@@ -143,6 +143,7 @@ WRITE_BYTE 0x27 TB#Paladinhood
 
 // Patching Project Image to avoid Freedom of Spirit to trigger!
 // (though it can happen only if you dual a high level Sword Angel to mage...)
+/*
 COPY_EXISTING ~SPWI703.SPL~ ~override~
   READ_LONG 0x6a eff_off
   READ_SHORT 0x70 glob_eff
@@ -154,7 +155,10 @@ COPY_EXISTING ~SPWI703.SPL~ ~override~
     WRITE_LONG (eff_off + 0xe) 120
     WRITE_BYTE (eff_off + 0x12) 100
     WRITE_ASCII (eff_off + 0x14) ~TG#FOS2~
-
+*/
+// As the comment above says, these lines were added to plug an unlikely exploit
+// Unfortunately, these lines somehow trip T&B's Revised Specialist during install
+// This works as a temporary solution
 
 
 COPY ~refinements/swang/copy~			~override~
