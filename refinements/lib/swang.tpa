@@ -320,7 +320,7 @@ BUT_ONLY_IF_IT_CHANGES
 
 
 // Changes to Wong Fei's Ioun Stone:
-COPY_EXISTING ~helm34.itm~ ~override~ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
+ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
 COPY_EXISTING ~helm34.itm~ ~override~
   READ_BYTE     0x29 current1
   WRITE_BYTE 0x29 (current1 BAND 0b11101111)  //usable!
