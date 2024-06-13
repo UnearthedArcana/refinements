@@ -264,7 +264,9 @@ EXTEND_TOP ~SHT0904.BCS~ ~refinements/swang/SHOUTS.BAF~
 
 // Fallen status triggered by intentional Slayer Change.
 // Better having Ascension already present!
-COMPILE ~refinements/swang/triggers.d~
+ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
+	COMPILE ~refinements/swang/triggers.d~
+END
 
 
 /* ***************************************************
