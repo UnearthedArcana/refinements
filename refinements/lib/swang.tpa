@@ -143,6 +143,7 @@ WRITE_BYTE 0x27 TB#Paladinhood
 
 // Patching Project Image to avoid Freedom of Spirit to trigger!
 // (though it can happen only if you dual a high level Sword Angel to mage...)
+/*
 COPY_EXISTING ~SPWI703.SPL~ ~override~
   READ_LONG 0x6a eff_off
   READ_SHORT 0x70 glob_eff
@@ -154,7 +155,10 @@ COPY_EXISTING ~SPWI703.SPL~ ~override~
     WRITE_LONG (eff_off + 0xe) 120
     WRITE_BYTE (eff_off + 0x12) 100
     WRITE_ASCII (eff_off + 0x14) ~TG#FOS2~
-
+*/
+// As the comment above says, these lines were added to plug an unlikely exploit
+// Unfortunately, these lines somehow trip T&B's Revised Specialist during install
+// This works as a temporary solution
 
 
 COPY ~refinements/swang/copy~			~override~
@@ -264,7 +268,9 @@ EXTEND_TOP ~SHT0904.BCS~ ~refinements/swang/SHOUTS.BAF~
 
 // Fallen status triggered by intentional Slayer Change.
 // Better having Ascension already present!
-COMPILE ~refinements/swang/triggers.d~
+ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
+	COMPILE ~refinements/swang/triggers.d~
+END
 
 
 /* ***************************************************
@@ -318,6 +324,7 @@ BUT_ONLY_IF_IT_CHANGES
 
 
 // Changes to Wong Fei's Ioun Stone:
+ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
 COPY_EXISTING ~helm34.itm~ ~override~
   READ_BYTE     0x29 current1
   WRITE_BYTE 0x29 (current1 BAND 0b11101111)  //usable!
@@ -328,38 +335,48 @@ COPY_EXISTING ~helm34.itm~ ~override~
   READ_BYTE     0x2f current4
   WRITE_BYTE 0x2f ((current4 BAND 0b11010111) BOR 0b00000011)  //usable!
   SAY DESC @1070
+END
 
+ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
 COPY_EXISTING ~brac21.itm~ ~override~
               ~helm34.itm~ ~override~
   READ_BYTE     0x2b current
   WRITE_BYTE 0x2b (current BAND 0b10111111)  //usable!
+END
 
-COPY_EXISTING ~belt06.itm~ ~override~
-              ~belt07.itm~ ~override~
-              ~belt08.itm~ ~override~
-              ~belt11.itm~ ~override~
-              ~brac06.itm~ ~override~
-              ~hamm09.itm~ ~override~
-              ~SW1H61.itm~ ~override~
+COPY_EXISTING ~brac06.itm~ ~override~
               ~POTN03.itm~ ~override~
               ~POTN04.itm~ ~override~
               ~POTN05.itm~ ~override~
               ~POTN06.itm~ ~override~
               ~POTN07.itm~ ~override~
               ~POTN12.itm~ ~override~
+  READ_BYTE     0x2b current
+  WRITE_BYTE 0x2b (current BOR 0b01000000)
+
+ACTION_IF GAME_IS ~bg1ee bg2ee eet~ THEN BEGIN
+COPY_EXISTING ~belt06.itm~ ~override~
+              ~belt07.itm~ ~override~
+  READ_BYTE     0x2b current
+  WRITE_BYTE 0x2b (current BOR 0b01000000)
+END
+
+ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
+COPY_EXISTING ~belt08.itm~ ~override~
+              ~belt11.itm~ ~override~
+              ~hamm09.itm~ ~override~
 /*
 May include Mauler and lesser version of Angurvadal.
 Poisoned and ~vile~ weapons follow:
 */
+              ~SW1H61.itm~ ~override~
               ~SPER10.itm~ ~override~
               ~miscbc.itm~ ~override~
               ~SW1H35.itm~ ~override~
               ~SW1H38.itm~ ~override~
               ~SW1H59.itm~ ~override~
               ~SW1H63.itm~ ~override~
-              ~DAGG16.itm~ ~override~
               ~DAGG20.itm~ ~override~
-              ~MISC75.itm~ ~override~
               ~HALB11.itm~ ~override~
               ~SW2H15.itm~ ~override~
               ~SW2H17.itm~ ~override~
@@ -367,6 +384,8 @@ Poisoned and ~vile~ weapons follow:
               ~STAF23.itm~ ~override~
               ~AX1H13.itm~ ~override~
               ~AX1H15.itm~ ~override~
+              ~DAGG16.itm~ ~override~
+              ~MISC75.itm~ ~override~
               ~BLUN17.itm~ ~override~
               ~BLUN18.itm~ ~override~
               ~BLUN22.itm~ ~override~
@@ -375,7 +394,7 @@ Poisoned and ~vile~ weapons follow:
               ~LEAT19.itm~ ~override~
   READ_BYTE     0x2b current
   WRITE_BYTE 0x2b (current BOR 0b01000000)
-
+END
 
 /*
 Patches for Item Upgrade */
